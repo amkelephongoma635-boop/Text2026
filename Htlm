@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hey You ❤️</title>
+
+<style>
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+    overflow:hidden;
+    font-family:Arial,sans-serif;
+}
+
+.container{
+    text-align:center;
+}
+
+.heart{
+    font-size:100px;
+    animation:pulse 1s infinite;
+}
+
+@keyframes pulse{
+    0%,100%{transform:scale(1);}
+    50%{transform:scale(1.2);}
+}
+
+.message{
+    margin-top:20px;
+    font-size:28px;
+    color:white;
+    font-weight:bold;
+    min-height:40px;
+}
+
+.floating{
+    position:absolute;
+    font-size:30px;
+    animation:float 8s linear infinite;
+}
+
+@keyframes float{
+    from{
+        transform:translateY(100vh);
+        opacity:1;
+    }
+    to{
+        transform:translateY(-100px);
+        opacity:0;
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="heart">💖</div>
+    <div class="message" id="text"></div>
+</div>
+
+<script>
+const message = "Why aren't you answering my texts? 😢";
+let i = 0;
+
+function typeWriter(){
+    if(i < message.length){
+        document.getElementById("text").innerHTML += message.charAt(i);
+        i++;
+        setTimeout(typeWriter, 90);
+    }
+}
+typeWriter();
+
+function createHeart(){
+    const heart = document.createElement("div");
+    heart.className = "floating";
+    heart.innerHTML = "💕";
+    heart.style.left = Math.random()*100 + "vw";
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+        heart.remove();
+    }, 8000);
+}
+
+setInterval(createHeart, 500);
+</script>
+
+</body>
+</html>
